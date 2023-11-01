@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <form id="registrationForm" enctype="multipart/form-data">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="picture">Profile Picture:</label>
+        <input type="file" id="picture" name="picture"><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location"><br>
+
+        <label for="occupation">Occupation:</label>
+        <input type="text" id="occupation" name="occupation"><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        // JavaScript code to handle form submission
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Create a FormData object to handle file uploads
+            const formData = new FormData(this);
+
+            // Send the form data to your server using a fetch request
+            fetch("http://localhost:3001/auth/register", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Registration successful, you can redirect or show a success message
+                    console.log("Registration successful");
+                    // Redirect or display a success message
+                } else {
+                    // Registration failed, handle errors here
+                    console.error("Registration failed");
+                    // Display an error message to the user
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                // Handle network or server errors
+            });
+        });
+    </script>
+</body>
+</html>
